@@ -139,8 +139,8 @@ buildSearchFilterValueList searchFilterCustomType searchFilterTypes trucks =
                     )
 
         Price ->
-             Array.indexedMap
-                         (\index range -> 
+            Array.indexedMap
+                        (\index range -> 
 
                             let
                                 minmaxValue = getMinMaxValue range     
@@ -158,9 +158,19 @@ buildSearchFilterValueList searchFilterCustomType searchFilterTypes trucks =
                                                         (List.length <| List.filter (\t -> t.price >= minValue && t.price <= maxValue) trucks) 
                                                         searchFilterCustomType 
 
-                         )
-                         
+                        )                
                         searchFilterTypes
+                
+        BodyType -> 
+            --List.map (\t -> t.bodyType) trucks
+            List.map .bodyType trucks
+                |> applyExtraOnSearchFilter 0
+                |> (\sfArray -> 
+                                Array.indexedMap (\index sf -> 
+                                                SearchFilterType index sf "EXD" False (List.length <| (List.filter (\t -> String.trim t.bodyType == sf) trucks )) searchFilterCustomType
+                                )
+                                sfArray
+                    )
 
 buildSearchFilterValueRecordList : SearchFilterCustomType -> Array SearchFilterType -> List Truck -> Array SearchFilterType
 buildSearchFilterValueRecordList searchFilterCustomType searchFilterTypes trucks =
@@ -196,6 +206,9 @@ buildSearchFilterValuesGroup searchFilterCustomType model uiModel =
                             
                             Price -> 
                                 (uiModel.priceFilters, "Price", FilterCheckBoxClicked)
+
+                            BodyType -> 
+                                (uiModel.bodyTypeFilters, "BodyType", FilterCheckBoxClicked)
 
             searchFilterState = 
                     uiModel.expandCollapseSearchFilterStates

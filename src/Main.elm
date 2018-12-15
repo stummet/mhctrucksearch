@@ -127,10 +127,10 @@ update msg (model, uiModel) =
                                     Err err ->
                                             []
 
-                x =  Debug.log "ranges before" priceFiltersList
+                --x =  Debug.log "ranges before" priceFiltersList
                 --priceFilters = buildSearchFilterValueRangeList Price (Array.fromList <| priceFiltersList) model.truckList
                 priceFilters = buildSearchFilterValueRecordList Price (Array.fromList <| priceFiltersList) model.truckList
-                x1 =  Debug.log "ranges after " priceFilters
+                --x1 =  Debug.log "ranges after " priceFilters
                 --y = Debug.log "asdfasdfasdfsadfasddsaf" [List.map .price model.truckList]
                 
             in
@@ -140,6 +140,7 @@ update msg (model, uiModel) =
 
         OnFetchTrucks response ->
             let
+                --zc = Debug.log "trucks"  [response]--, newUIModel1.yearFilters]
                 trucks = case response of
                             Ok truckList ->
                                     truckList
@@ -159,6 +160,10 @@ update msg (model, uiModel) =
                 modelFilters = buildSearchFilterValueRecordList MakeModel uiModel.modelFilters trucks
                 sleeperRoofFilters = buildSearchFilterValueRecordList SleeperRoof uiModel.sleeperRoofFilters trucks
                 sleeperBunkFilters = buildSearchFilterValueRecordList SleeperBunk uiModel.sleeperBunkFilters trucks
+                bodyTypeFilters = buildSearchFilterValueRecordList BodyType uiModel.bodyTypeFilters trucks
+                
+                --zc = Debug.log "trucks"  [trucks]--, newUIModel1.yearFilters]
+                --c = Debug.log "body filters"  [bodyTypeFilters]--, newUIModel1.yearFilters]
 
                 --filteredTruckList = List.filter (\t -> t.year == "2019" ) trucks
                 pagedTruckList = List.take 100 trucks
@@ -173,7 +178,8 @@ update msg (model, uiModel) =
                                         modelFilters = modelFilters, 
                                         salesStatusFilters = salesStatusFilters, 
                                         sleeperRoofFilters = sleeperRoofFilters, 
-                                        sleeperBunkFilters = sleeperBunkFilters 
+                                        sleeperBunkFilters = sleeperBunkFilters,
+                                        bodyTypeFilters = bodyTypeFilters 
                         }
                     )
                     --, Cmd.none
@@ -262,7 +268,12 @@ update msg (model, uiModel) =
 
                         Price -> 
                             (uiModel.priceFilters |> updateUserSelectedSearchFilter) (\mfArr -> {uiModel | priceFilters = mfArr})
-                                --|> (\filters -> updateUserSelectedSearchFilter filters (\mfArr -> {uiModel | sleeperBunkFilters = mfArr}) )    
+                                --|> (\filters -> updateUserSelectedSearchFilter filters (\mfArr -> {uiModel | sleeperBunkFilters = mfArr}) )
+
+                        bodyType -> 
+                            (uiModel.bodyTypeFilters |> updateUserSelectedSearchFilter) (\mfArr -> {uiModel | bodyTypeFilters = mfArr})
+                                --|> (\filters -> updateUserSelectedSearchFilter filters (\mfArr -> {uiModel | sleeperBunkFilters = mfArr}) )
+
                 newFilteredTruckList = applySearchFilters model newUIModel
                                             |> sortTruckList uiModel.currentSortBy
 
@@ -345,7 +356,8 @@ update msg (model, uiModel) =
                                                                                     Array.toList uiModel.modelFilters,
                                                                                     Array.toList uiModel.sleeperRoofFilters,
                                                                                     Array.toList uiModel.sleeperBunkFilters,
-                                                                                    Array.toList uiModel.priceFilters
+                                                                                    Array.toList uiModel.priceFilters,
+                                                                                    Array.toList uiModel.bodyTypeFilters
                                                                                 ]
 
                 sortedFilteredTruckList = sortTruckList sortBy <|
@@ -492,6 +504,10 @@ view (model, uiModel) =
                                         lazy3 buildSearchFilterValuesGroup Price model uiModel
                                     else
                                         none                                                        
+                                    , if List.length model.filteredTruckList > 0 then
+                                        lazy3 buildSearchFilterValuesGroup BodyType model uiModel
+                                    else
+                                        none
                                 ]
                             ]
                             
@@ -529,7 +545,8 @@ view (model, uiModel) =
                                                                                     Array.toList uiModel.modelFilters,
                                                                                     Array.toList uiModel.sleeperRoofFilters,
                                                                                     Array.toList uiModel.sleeperBunkFilters,
-                                                                                    Array.toList uiModel.priceFilters
+                                                                                    Array.toList uiModel.priceFilters,
+                                                                                    Array.toList uiModel.bodyTypeFilters
                                                                                 ]
                                 ]
                                 ,column[ scrollbarY, wf,  bw 0, pde 5 0 0 0   ]

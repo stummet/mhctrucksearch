@@ -29,8 +29,8 @@ fetchSearchFilterRanges =
 fetchTrucksUrl: String
 fetchTrucksUrl =
         --"http://localhost:13627/api/repairorder/gettrucks"
-        "http://localhost:50977/api/repairorder/gettrucks"
-        --"http://localhost:3333/trks"
+        --"http://localhost:50977/api/repairorder/gettrucks"
+        "http://localhost:3333/trks"
 
 
 fetchSearchFilterRangesUrl: String
@@ -58,7 +58,7 @@ trucksDecoder  =
         |> required "model" Decode.string
         |> required "engineMake" Decode.string
         |> required "engineModel" Decode.string
-        |> required "engineHP" Decode.string
+        |> required "engineHP" Decode.int
         |> required "apu" Decode.string
         |> required "cdl" Decode.string
         |> required "year" Decode.string
@@ -74,6 +74,7 @@ trucksDecoder  =
         |> required "mileage" Decode.int
         |> required "locationNumber" Decode.string
         |> required "locationName" Decode.string
+        |> required "bodyType" Decode.string
     
 
 onFetchSearchFilterRangesDecoder : Decode.Decoder (List SearchFilterType)

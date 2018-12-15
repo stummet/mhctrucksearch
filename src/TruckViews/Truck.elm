@@ -99,7 +99,8 @@ truckView index truck =
                     [
                         dataFieldView  "Engine Make:"   truck.engineMake
                         ,dataFieldView  "Engine Model:"   truck.engineModel
-                        ,dataFieldView  "Horsepower:" truck.engineHP
+                        -- ,dataFieldView  "Horsepower:" truck.engineHP
+                        ,dataFieldView  "Horsepower:" <|  format "0,0" <|  Basics.toFloat truck.engineHP
                         ,dataFieldView  "Transmission:"    truck.transType
                     ]
                 ]
