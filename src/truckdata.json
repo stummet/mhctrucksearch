@@ -27,7 +27,8 @@
     "locationNumber": "114",
     "locationName": "Cedar Rapids",
     "engineHP": 455,
-    "bodyType": "Beverage"
+    "bodyType": "Beverage",
+    "suspension": "Air"
     },
     {
     "id": "e89d0ec8-a568-4554-9a22-003b49f32d84",
@@ -57,7 +58,8 @@
     "locationNumber": "66",
     "locationName": "South Dallas, TX",
     "engineHP": 455    ,
-    "bodyType": "Dryvan"
+    "bodyType": "Dryvan",
+    "suspension": "Air"
     },
     {
     "id": "a2145fbf-6ba6-494c-b04e-004e2c9279ff",
@@ -87,7 +89,8 @@
     "locationNumber": "",
     "locationName": "",
     "engineHP": 380,
-    "bodyType": "Dryvan"
+    "bodyType": "Dryvan",
+    "suspension": "Heavy"
     },
     {
     "id": "764281c5-f778-414c-96cf-008ba58fb2bb",
@@ -117,7 +120,8 @@
     "locationNumber": "45",
     "locationName": "Oklahoma City",
     "engineHP": 450,
-    "bodyType": "Flatbed"
+    "bodyType": "Flatbed",
+    "suspension": "Heavy"
     },
     {
     "id": "c5f0ef4b-784f-4c30-9b40-00b3a137c5b0",
@@ -147,7 +151,8 @@
     "locationNumber": "",
     "locationName": "",
     "engineHP": 380,
-    "bodyType": "Dump"
+    "bodyType": "Dump",
+    "suspension": "Spring"
     }
     ]
 }

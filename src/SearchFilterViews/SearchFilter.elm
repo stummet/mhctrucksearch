@@ -172,6 +172,17 @@ buildSearchFilterValueList searchFilterCustomType searchFilterTypes trucks =
                                 sfArray
                     )
 
+        Suspension -> 
+            --List.map (\t -> suspension) trucks
+            List.map .suspension trucks
+                |> applyExtraOnSearchFilter 0
+                |> (\sfArray -> 
+                                Array.indexedMap (\index sf -> 
+                                                SearchFilterType index sf "EXD" False (List.length <| (List.filter (\t -> String.trim t.suspension == sf) trucks )) searchFilterCustomType
+                                )
+                                sfArray
+                    )
+
 buildSearchFilterValueRecordList : SearchFilterCustomType -> Array SearchFilterType -> List Truck -> Array SearchFilterType
 buildSearchFilterValueRecordList searchFilterCustomType searchFilterTypes trucks =
     buildSearchFilterValueList searchFilterCustomType searchFilterTypes trucks
@@ -208,7 +219,10 @@ buildSearchFilterValuesGroup searchFilterCustomType model uiModel =
                                 (uiModel.priceFilters, "Price", FilterCheckBoxClicked)
 
                             BodyType -> 
-                                (uiModel.bodyTypeFilters, "BodyType", FilterCheckBoxClicked)
+                                (uiModel.bodyTypeFilters, "BodyType", FilterCheckBoxClicked)                                
+
+                            Suspension -> 
+                                (uiModel.suspensionFilters, "Suspension", FilterCheckBoxClicked)
 
             searchFilterState = 
                     uiModel.expandCollapseSearchFilterStates

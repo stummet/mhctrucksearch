@@ -161,6 +161,7 @@ update msg (model, uiModel) =
                 sleeperRoofFilters = buildSearchFilterValueRecordList SleeperRoof uiModel.sleeperRoofFilters trucks
                 sleeperBunkFilters = buildSearchFilterValueRecordList SleeperBunk uiModel.sleeperBunkFilters trucks
                 bodyTypeFilters = buildSearchFilterValueRecordList BodyType uiModel.bodyTypeFilters trucks
+                suspensionFilters = buildSearchFilterValueRecordList Suspension uiModel.suspensionFilters trucks
                 
                 --zc = Debug.log "trucks"  [trucks]--, newUIModel1.yearFilters]
                 --c = Debug.log "body filters"  [bodyTypeFilters]--, newUIModel1.yearFilters]
@@ -179,7 +180,8 @@ update msg (model, uiModel) =
                                         salesStatusFilters = salesStatusFilters, 
                                         sleeperRoofFilters = sleeperRoofFilters, 
                                         sleeperBunkFilters = sleeperBunkFilters,
-                                        bodyTypeFilters = bodyTypeFilters 
+                                        bodyTypeFilters = bodyTypeFilters,
+                                        suspensionFilters = suspensionFilters 
                         }
                     )
                     --, Cmd.none
@@ -268,11 +270,15 @@ update msg (model, uiModel) =
 
                         Price -> 
                             (uiModel.priceFilters |> updateUserSelectedSearchFilter) (\mfArr -> {uiModel | priceFilters = mfArr})
-                                --|> (\filters -> updateUserSelectedSearchFilter filters (\mfArr -> {uiModel | sleeperBunkFilters = mfArr}) )
+                                --|> (\filters -> updateUserSelectedSearchFilter filters (\mfArr -> {uiModel | priceFilters = mfArr}) )
 
-                        bodyType -> 
+                        BodyType -> 
                             (uiModel.bodyTypeFilters |> updateUserSelectedSearchFilter) (\mfArr -> {uiModel | bodyTypeFilters = mfArr})
-                                --|> (\filters -> updateUserSelectedSearchFilter filters (\mfArr -> {uiModel | sleeperBunkFilters = mfArr}) )
+                                --|> (\filters -> updateUserSelectedSearchFilter filters (\mfArr -> {uiModel | bodyTypeFilters = mfArr}) )
+
+                        Suspension -> 
+                            (uiModel.suspensionFilters |> updateUserSelectedSearchFilter) (\mfArr -> {uiModel | suspensionFilters = mfArr})
+                                --|> (\filters -> updateUserSelectedSearchFilter filters (\mfArr -> {uiModel | suspensionFilters = mfArr}) )
 
                 newFilteredTruckList = applySearchFilters model newUIModel
                                             |> sortTruckList uiModel.currentSortBy
@@ -357,7 +363,8 @@ update msg (model, uiModel) =
                                                                                     Array.toList uiModel.sleeperRoofFilters,
                                                                                     Array.toList uiModel.sleeperBunkFilters,
                                                                                     Array.toList uiModel.priceFilters,
-                                                                                    Array.toList uiModel.bodyTypeFilters
+                                                                                    Array.toList uiModel.bodyTypeFilters,
+                                                                                    Array.toList uiModel.suspensionFilters
                                                                                 ]
 
                 sortedFilteredTruckList = sortTruckList sortBy <|
@@ -508,6 +515,10 @@ view (model, uiModel) =
                                         lazy3 buildSearchFilterValuesGroup BodyType model uiModel
                                     else
                                         none
+                                        , if List.length model.filteredTruckList > 0 then
+                                        lazy3 buildSearchFilterValuesGroup Suspension model uiModel
+                                    else
+                                        none
                                 ]
                             ]
                             
@@ -546,7 +557,8 @@ view (model, uiModel) =
                                                                                     Array.toList uiModel.sleeperRoofFilters,
                                                                                     Array.toList uiModel.sleeperBunkFilters,
                                                                                     Array.toList uiModel.priceFilters,
-                                                                                    Array.toList uiModel.bodyTypeFilters
+                                                                                    Array.toList uiModel.bodyTypeFilters,
+                                                                                    Array.toList uiModel.suspensionFilters
                                                                                 ]
                                 ]
                                 ,column[ scrollbarY, wf,  bw 0, pde 5 0 0 0   ]

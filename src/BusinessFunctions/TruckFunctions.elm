@@ -104,6 +104,8 @@ rebuildSearchFiltersBasedOnCurrentSearchCriteria model uiModel =
                                         )
                                 >> (buildFilteredSearchResultBySearchType uiModel.bodyTypeFilters)
                                         (\t sf -> String.trim sf.searchFilterKey == String.trim t.bodyType && sf.userAction == True )
+                                >> (buildFilteredSearchResultBySearchType uiModel.suspensionFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.suspension && sf.userAction == True )
                                 -- >> (\trks -> -- this is just to log intermediate result from with the function chains
                                 --         let
                                 --                y = Debug.log "sales filters - >" [trks]
@@ -140,6 +142,8 @@ rebuildSearchFiltersBasedOnCurrentSearchCriteria model uiModel =
                                         )
                                 >> (buildFilteredSearchResultBySearchType uiModel.bodyTypeFilters)
                                         (\t sf -> String.trim sf.searchFilterKey == String.trim t.bodyType && sf.userAction == True )
+                                >> (buildFilteredSearchResultBySearchType uiModel.suspensionFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.suspension && sf.userAction == True )
                                 -- >> (\trks -> -- this is just to log intermediate result from with the function chains
                                 --         let
                                 --                y = Debug.log "year filters - >" [trks]
@@ -175,6 +179,8 @@ rebuildSearchFiltersBasedOnCurrentSearchCriteria model uiModel =
                                         )
                                 >> (buildFilteredSearchResultBySearchType uiModel.bodyTypeFilters)
                                         (\t sf -> String.trim sf.searchFilterKey == String.trim t.bodyType && sf.userAction == True )
+                                >> (buildFilteredSearchResultBySearchType uiModel.suspensionFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.suspension && sf.userAction == True )
                                 >> buildSearchFilterValueRecordList Make uiModel.makeFilters
                                         >> Array.map
                                                 (\sf ->
@@ -204,6 +210,8 @@ rebuildSearchFiltersBasedOnCurrentSearchCriteria model uiModel =
                                         )
                                 >> (buildFilteredSearchResultBySearchType uiModel.bodyTypeFilters)
                                         (\t sf -> String.trim sf.searchFilterKey == String.trim t.bodyType && sf.userAction == True )
+                                >> (buildFilteredSearchResultBySearchType uiModel.suspensionFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.suspension && sf.userAction == True )
                                 >> buildSearchFilterValueRecordList MakeModel uiModel.modelFilters
                                         >> Array.map
                                                 (\sf ->
@@ -233,6 +241,8 @@ rebuildSearchFiltersBasedOnCurrentSearchCriteria model uiModel =
                                         )
                                 >> (buildFilteredSearchResultBySearchType uiModel.bodyTypeFilters)
                                         (\t sf -> String.trim sf.searchFilterKey == String.trim t.bodyType && sf.userAction == True )
+                                >> (buildFilteredSearchResultBySearchType uiModel.suspensionFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.suspension && sf.userAction == True )
                                 >> buildSearchFilterValueRecordList SleeperRoof uiModel.sleeperRoofFilters
                                         >> Array.map
                                                 (\sf ->
@@ -262,6 +272,8 @@ rebuildSearchFiltersBasedOnCurrentSearchCriteria model uiModel =
                                         )
                                 >> (buildFilteredSearchResultBySearchType uiModel.bodyTypeFilters)
                                         (\t sf -> String.trim sf.searchFilterKey == String.trim t.bodyType && sf.userAction == True )
+                                >> (buildFilteredSearchResultBySearchType uiModel.suspensionFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.suspension && sf.userAction == True )
                                 >> buildSearchFilterValueRecordList SleeperBunk uiModel.sleeperBunkFilters
                                 >> Array.map
                                                 (\sf ->
@@ -284,6 +296,8 @@ rebuildSearchFiltersBasedOnCurrentSearchCriteria model uiModel =
                                         (\t sf -> String.trim sf.searchFilterKey == String.trim t.sleeperBunk && sf.userAction == True )
                                 >> (buildFilteredSearchResultBySearchType uiModel.bodyTypeFilters)
                                         (\t sf -> String.trim sf.searchFilterKey == String.trim t.bodyType && sf.userAction == True )
+                                >> (buildFilteredSearchResultBySearchType uiModel.suspensionFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.suspension && sf.userAction == True )
                                 >> buildSearchFilterValueRecordList Price uiModel.priceFilters
                                 >> Array.map
                                         (\sf ->
@@ -304,6 +318,8 @@ rebuildSearchFiltersBasedOnCurrentSearchCriteria model uiModel =
                                         (\t sf -> String.trim sf.searchFilterKey == String.trim t.sleeperRoof && sf.userAction == True )
                                 >> (buildFilteredSearchResultBySearchType uiModel.sleeperBunkFilters)
                                         (\t sf -> String.trim sf.searchFilterKey == String.trim t.sleeperBunk && sf.userAction == True )
+                                >> (buildFilteredSearchResultBySearchType uiModel.suspensionFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.suspension && sf.userAction == True )
                                 >> (buildFilteredSearchResultBySearchType uiModel.priceFilters)
                                         (\t sf -> 
                                                 let
@@ -319,6 +335,35 @@ rebuildSearchFiltersBasedOnCurrentSearchCriteria model uiModel =
                                                         findMatchAndSetUserAction uiModel.bodyTypeFilters sf 
                                                 )
                 
+                updatedSuspensionFitlerList =
+                        model.truckList
+                                |> (buildFilteredSearchResultBySearchType uiModel.salesStatusFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.salesStatus && sf.userAction == True )
+                                |> (buildFilteredSearchResultBySearchType uiModel.yearFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.year && sf.userAction == True )
+                                >> (buildFilteredSearchResultBySearchType uiModel.makeFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.make && sf.userAction == True )
+                                >> (buildFilteredSearchResultBySearchType uiModel.modelFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.model && sf.userAction == True )
+                                >> (buildFilteredSearchResultBySearchType uiModel.sleeperRoofFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.sleeperRoof && sf.userAction == True )
+                                >> (buildFilteredSearchResultBySearchType uiModel.priceFilters)
+                                        (\t sf -> 
+                                                let
+                                                        minmaxValue = getMinMaxValue sf    
+                                                        minValue = Tuple.first minmaxValue
+                                                        maxValue = Tuple.second minmaxValue
+                                                in
+                                                        t.price >= minValue && t.price <= maxValue && sf.userAction == True 
+                                        )
+                                >> (buildFilteredSearchResultBySearchType uiModel.bodyTypeFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.bodyType && sf.userAction == True )                               
+                                >> buildSearchFilterValueRecordList Suspension uiModel.suspensionFilters
+                                >> Array.map
+                                                (\sf ->
+                                                        findMatchAndSetUserAction uiModel.suspensionFilters sf 
+                                                )                
+                
                 newUIModel = 
                         {
                                 uiModel |
@@ -330,6 +375,7 @@ rebuildSearchFiltersBasedOnCurrentSearchCriteria model uiModel =
                                                 , sleeperBunkFilters = updatedSleeperBunkFitlerList
                                                 , priceFilters = updatedPriceFitlerList
                                                 , bodyTypeFilters = updatedBodyTypeFitlerList
+                                                , suspensionFilters = updatedSuspensionFitlerList
                         }
         in
                 newUIModel
@@ -363,6 +409,8 @@ applySearchFilters model uiModel =
                                         )
                         >> (buildFilteredSearchResultBySearchType uiModel.bodyTypeFilters)
                                 (\t sf -> String.trim sf.searchFilterKey == String.trim t.bodyType && sf.userAction == True )
+                        >> (buildFilteredSearchResultBySearchType uiModel.suspensionFilters)
+                                (\t sf -> String.trim sf.searchFilterKey == String.trim t.suspension && sf.userAction == True )
 
         sortedFilterdTruckList =
             filterdTruckList
