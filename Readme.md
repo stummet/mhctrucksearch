@@ -2,7 +2,9 @@
 
 Run json-server --watch src/truckdata.json --port 3333 in one terminal windows
 
-Run elm-app start in another terminal windows
+Run json-server --watch src/srcFilterRanges.json --port 4444 in second terminal windows
+
+Run elm-app start in 3rd terminal windows
 
 test 
 # Elm App
