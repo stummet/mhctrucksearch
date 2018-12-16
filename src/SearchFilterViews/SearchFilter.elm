@@ -258,7 +258,7 @@ buildSearchFilterValuesGroup searchFilterCustomType model uiModel =
                                 (uiModel.suspensionFilters, "Suspension", FilterCheckBoxClicked)                                
 
                             EngineMake -> 
-                                (uiModel.engineMakeFilters, "EngineMake", FilterCheckBoxClicked)                                
+                                (uiModel.engineMakeFilters, "Engine Make", FilterCheckBoxClicked)                                
 
                             Transmission -> 
                                 (uiModel.transmissionFilters, "Transmission", FilterCheckBoxClicked)                                
