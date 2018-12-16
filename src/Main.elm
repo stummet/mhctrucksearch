@@ -162,6 +162,7 @@ update msg (model, uiModel) =
                 sleeperBunkFilters = buildSearchFilterValueRecordList SleeperBunk uiModel.sleeperBunkFilters trucks
                 bodyTypeFilters = buildSearchFilterValueRecordList BodyType uiModel.bodyTypeFilters trucks
                 suspensionFilters = buildSearchFilterValueRecordList Suspension uiModel.suspensionFilters trucks
+                engineMakeFilters = buildSearchFilterValueRecordList EngineMake uiModel.engineMakeFilters trucks
                 
                 --zc = Debug.log "trucks"  [trucks]--, newUIModel1.yearFilters]
                 --c = Debug.log "body filters"  [bodyTypeFilters]--, newUIModel1.yearFilters]
@@ -181,7 +182,8 @@ update msg (model, uiModel) =
                                         sleeperRoofFilters = sleeperRoofFilters, 
                                         sleeperBunkFilters = sleeperBunkFilters,
                                         bodyTypeFilters = bodyTypeFilters,
-                                        suspensionFilters = suspensionFilters 
+                                        suspensionFilters = suspensionFilters,
+                                        engineMakeFilters = engineMakeFilters 
                         }
                     )
                     --, Cmd.none
@@ -280,6 +282,11 @@ update msg (model, uiModel) =
                             (uiModel.suspensionFilters |> updateUserSelectedSearchFilter) (\mfArr -> {uiModel | suspensionFilters = mfArr})
                                 --|> (\filters -> updateUserSelectedSearchFilter filters (\mfArr -> {uiModel | suspensionFilters = mfArr}) )
 
+                        EngineMake -> 
+                            (uiModel.engineMakeFilters |> updateUserSelectedSearchFilter) (\mfArr -> {uiModel | engineMakeFilters = mfArr})
+                                --|> (\filters -> updateUserSelectedSearchFilter filters (\mfArr -> {uiModel | EngineMakeFilters = mfArr}) )
+
+
                 newFilteredTruckList = applySearchFilters model newUIModel
                                             |> sortTruckList uiModel.currentSortBy
 
@@ -364,7 +371,8 @@ update msg (model, uiModel) =
                                                                                     Array.toList uiModel.sleeperBunkFilters,
                                                                                     Array.toList uiModel.priceFilters,
                                                                                     Array.toList uiModel.bodyTypeFilters,
-                                                                                    Array.toList uiModel.suspensionFilters
+                                                                                    Array.toList uiModel.suspensionFilters,
+                                                                                    Array.toList uiModel.engineMakeFilters
                                                                                 ]
 
                 sortedFilteredTruckList = sortTruckList sortBy <|
@@ -515,8 +523,12 @@ view (model, uiModel) =
                                         lazy3 buildSearchFilterValuesGroup BodyType model uiModel
                                     else
                                         none
-                                        , if List.length model.filteredTruckList > 0 then
+                                    , if List.length model.filteredTruckList > 0 then
                                         lazy3 buildSearchFilterValuesGroup Suspension model uiModel
+                                    else
+                                        none
+                                    , if List.length model.filteredTruckList > 0 then
+                                        lazy3 buildSearchFilterValuesGroup EngineMake model uiModel
                                     else
                                         none
                                 ]
@@ -558,7 +570,8 @@ view (model, uiModel) =
                                                                                     Array.toList uiModel.sleeperBunkFilters,
                                                                                     Array.toList uiModel.priceFilters,
                                                                                     Array.toList uiModel.bodyTypeFilters,
-                                                                                    Array.toList uiModel.suspensionFilters
+                                                                                    Array.toList uiModel.suspensionFilters,
+                                                                                    Array.toList uiModel.engineMakeFilters
                                                                                 ]
                                 ]
                                 ,column[ scrollbarY, wf,  bw 0, pde 5 0 0 0   ]
