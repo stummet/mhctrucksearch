@@ -107,7 +107,11 @@ rebuildSearchFiltersBasedOnCurrentSearchCriteria model uiModel =
                                 >> (buildFilteredSearchResultBySearchType uiModel.suspensionFilters)
                                         (\t sf -> String.trim sf.searchFilterKey == String.trim t.suspension && sf.userAction == True )
                                 >> (buildFilteredSearchResultBySearchType uiModel.engineMakeFilters)
-                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.engineMake && sf.userAction == True )
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.engineMake && sf.userAction == True )                                        
+                                >> (buildFilteredSearchResultBySearchType uiModel.transmissionFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.transmission && sf.userAction == True )                                        
+                                >> (buildFilteredSearchResultBySearchType uiModel.rearAxleTypeFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.rearAxleType && sf.userAction == True )
                                 -- >> (\trks -> -- this is just to log intermediate result from with the function chains
                                 --         let
                                 --                y = Debug.log "sales filters - >" [trks]
@@ -147,7 +151,11 @@ rebuildSearchFiltersBasedOnCurrentSearchCriteria model uiModel =
                                 >> (buildFilteredSearchResultBySearchType uiModel.suspensionFilters)
                                         (\t sf -> String.trim sf.searchFilterKey == String.trim t.suspension && sf.userAction == True )
                                 >> (buildFilteredSearchResultBySearchType uiModel.engineMakeFilters)
-                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.engineMake && sf.userAction == True )
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.engineMake && sf.userAction == True )                                        
+                                >> (buildFilteredSearchResultBySearchType uiModel.transmissionFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.transmission && sf.userAction == True )                                        
+                                >> (buildFilteredSearchResultBySearchType uiModel.rearAxleTypeFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.rearAxleType && sf.userAction == True )
                                 -- >> (\trks -> -- this is just to log intermediate result from with the function chains
                                 --         let
                                 --                y = Debug.log "year filters - >" [trks]
@@ -186,7 +194,11 @@ rebuildSearchFiltersBasedOnCurrentSearchCriteria model uiModel =
                                 >> (buildFilteredSearchResultBySearchType uiModel.suspensionFilters)
                                         (\t sf -> String.trim sf.searchFilterKey == String.trim t.suspension && sf.userAction == True )
                                 >> (buildFilteredSearchResultBySearchType uiModel.engineMakeFilters)
-                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.engineMake && sf.userAction == True )
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.engineMake && sf.userAction == True )                                        
+                                >> (buildFilteredSearchResultBySearchType uiModel.transmissionFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.transmission && sf.userAction == True )                                        
+                                >> (buildFilteredSearchResultBySearchType uiModel.rearAxleTypeFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.rearAxleType && sf.userAction == True )
                                 >> buildSearchFilterValueRecordList Make uiModel.makeFilters
                                         >> Array.map
                                                 (\sf ->
@@ -219,7 +231,11 @@ rebuildSearchFiltersBasedOnCurrentSearchCriteria model uiModel =
                                 >> (buildFilteredSearchResultBySearchType uiModel.suspensionFilters)
                                         (\t sf -> String.trim sf.searchFilterKey == String.trim t.suspension && sf.userAction == True )
                                 >> (buildFilteredSearchResultBySearchType uiModel.engineMakeFilters)
-                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.engineMake && sf.userAction == True )
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.engineMake && sf.userAction == True )                                        
+                                >> (buildFilteredSearchResultBySearchType uiModel.transmissionFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.transmission && sf.userAction == True )                                        
+                                >> (buildFilteredSearchResultBySearchType uiModel.rearAxleTypeFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.rearAxleType && sf.userAction == True )
                                 >> buildSearchFilterValueRecordList MakeModel uiModel.modelFilters
                                         >> Array.map
                                                 (\sf ->
@@ -252,7 +268,11 @@ rebuildSearchFiltersBasedOnCurrentSearchCriteria model uiModel =
                                 >> (buildFilteredSearchResultBySearchType uiModel.suspensionFilters)
                                         (\t sf -> String.trim sf.searchFilterKey == String.trim t.suspension && sf.userAction == True )
                                 >> (buildFilteredSearchResultBySearchType uiModel.engineMakeFilters)
-                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.engineMake && sf.userAction == True )
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.engineMake && sf.userAction == True )                                        
+                                >> (buildFilteredSearchResultBySearchType uiModel.transmissionFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.transmission && sf.userAction == True )                                        
+                                >> (buildFilteredSearchResultBySearchType uiModel.rearAxleTypeFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.rearAxleType && sf.userAction == True )
                                 >> buildSearchFilterValueRecordList SleeperRoof uiModel.sleeperRoofFilters
                                         >> Array.map
                                                 (\sf ->
@@ -285,7 +305,9 @@ rebuildSearchFiltersBasedOnCurrentSearchCriteria model uiModel =
                                 >> (buildFilteredSearchResultBySearchType uiModel.suspensionFilters)
                                         (\t sf -> String.trim sf.searchFilterKey == String.trim t.suspension && sf.userAction == True )
                                 >> (buildFilteredSearchResultBySearchType uiModel.engineMakeFilters)
-                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.engineMake && sf.userAction == True )
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.engineMake && sf.userAction == True )                                        
+                                >> (buildFilteredSearchResultBySearchType uiModel.transmissionFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.transmission && sf.userAction == True )
                                 >> buildSearchFilterValueRecordList SleeperBunk uiModel.sleeperBunkFilters
                                 >> Array.map
                                                 (\sf ->
@@ -311,7 +333,11 @@ rebuildSearchFiltersBasedOnCurrentSearchCriteria model uiModel =
                                 >> (buildFilteredSearchResultBySearchType uiModel.suspensionFilters)
                                         (\t sf -> String.trim sf.searchFilterKey == String.trim t.suspension && sf.userAction == True )
                                 >> (buildFilteredSearchResultBySearchType uiModel.engineMakeFilters)
-                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.engineMake && sf.userAction == True )
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.engineMake && sf.userAction == True )                                        
+                                >> (buildFilteredSearchResultBySearchType uiModel.transmissionFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.transmission && sf.userAction == True )                                        
+                                >> (buildFilteredSearchResultBySearchType uiModel.rearAxleTypeFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.rearAxleType && sf.userAction == True )
                                 >> buildSearchFilterValueRecordList Price uiModel.priceFilters
                                 >> Array.map
                                         (\sf ->
@@ -335,7 +361,11 @@ rebuildSearchFiltersBasedOnCurrentSearchCriteria model uiModel =
                                 >> (buildFilteredSearchResultBySearchType uiModel.suspensionFilters)
                                         (\t sf -> String.trim sf.searchFilterKey == String.trim t.suspension && sf.userAction == True )
                                 >> (buildFilteredSearchResultBySearchType uiModel.engineMakeFilters)
-                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.engineMake && sf.userAction == True )
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.engineMake && sf.userAction == True )                                        
+                                >> (buildFilteredSearchResultBySearchType uiModel.transmissionFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.transmission && sf.userAction == True )                                        
+                                >> (buildFilteredSearchResultBySearchType uiModel.rearAxleTypeFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.rearAxleType && sf.userAction == True )
                                 >> (buildFilteredSearchResultBySearchType uiModel.priceFilters)
                                         (\t sf -> 
                                                 let
@@ -375,7 +405,11 @@ rebuildSearchFiltersBasedOnCurrentSearchCriteria model uiModel =
                                 >> (buildFilteredSearchResultBySearchType uiModel.bodyTypeFilters)
                                         (\t sf -> String.trim sf.searchFilterKey == String.trim t.bodyType && sf.userAction == True )
                                 >> (buildFilteredSearchResultBySearchType uiModel.engineMakeFilters)
-                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.engineMake && sf.userAction == True )                               
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.engineMake && sf.userAction == True )                                        
+                                >> (buildFilteredSearchResultBySearchType uiModel.transmissionFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.transmission && sf.userAction == True )                                        
+                                >> (buildFilteredSearchResultBySearchType uiModel.rearAxleTypeFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.rearAxleType && sf.userAction == True )                               
                                 >> buildSearchFilterValueRecordList Suspension uiModel.suspensionFilters
                                 >> Array.map
                                                 (\sf ->
@@ -397,7 +431,11 @@ rebuildSearchFiltersBasedOnCurrentSearchCriteria model uiModel =
                                 >> (buildFilteredSearchResultBySearchType uiModel.sleeperBunkFilters)
                                         (\t sf -> String.trim sf.searchFilterKey == String.trim t.sleeperBunk && sf.userAction == True )
                                 >> (buildFilteredSearchResultBySearchType uiModel.suspensionFilters)
-                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.suspension && sf.userAction == True )
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.suspension && sf.userAction == True )                                        
+                                >> (buildFilteredSearchResultBySearchType uiModel.transmissionFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.transmission && sf.userAction == True )                                                                                
+                                >> (buildFilteredSearchResultBySearchType uiModel.rearAxleTypeFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.rearAxleType && sf.userAction == True )
                                 >> (buildFilteredSearchResultBySearchType uiModel.priceFilters)
                                         (\t sf -> 
                                                 let
@@ -412,7 +450,73 @@ rebuildSearchFiltersBasedOnCurrentSearchCriteria model uiModel =
                                                 (\sf ->
                                                         findMatchAndSetUserAction uiModel.engineMakeFilters sf 
                                                 )
-                                
+                
+                updatedTransmissionFitlerList =
+                        model.truckList
+                                |> (buildFilteredSearchResultBySearchType uiModel.salesStatusFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.salesStatus && sf.userAction == True )
+                                |> (buildFilteredSearchResultBySearchType uiModel.yearFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.year && sf.userAction == True )
+                                >> (buildFilteredSearchResultBySearchType uiModel.makeFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.make && sf.userAction == True )
+                                >> (buildFilteredSearchResultBySearchType uiModel.modelFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.model && sf.userAction == True )
+                                >> (buildFilteredSearchResultBySearchType uiModel.sleeperRoofFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.sleeperRoof && sf.userAction == True )
+                                >> (buildFilteredSearchResultBySearchType uiModel.priceFilters)
+                                        (\t sf -> 
+                                                let
+                                                        minmaxValue = getMinMaxValue sf    
+                                                        minValue = Tuple.first minmaxValue
+                                                        maxValue = Tuple.second minmaxValue
+                                                in
+                                                        t.price >= minValue && t.price <= maxValue && sf.userAction == True 
+                                        )
+                                >> (buildFilteredSearchResultBySearchType uiModel.bodyTypeFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.bodyType && sf.userAction == True )
+                                >> (buildFilteredSearchResultBySearchType uiModel.engineMakeFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.engineMake && sf.userAction == True )                                                                                
+                                >> (buildFilteredSearchResultBySearchType uiModel.rearAxleTypeFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.rearAxleType && sf.userAction == True )                            
+                                >> buildSearchFilterValueRecordList Transmission uiModel.transmissionFilters
+                                >> Array.map
+                                                (\sf ->
+                                                        findMatchAndSetUserAction uiModel.transmissionFilters sf 
+                                                )
+                
+                updatedRearAxleTypeFitlerList =
+                        model.truckList
+                                |> (buildFilteredSearchResultBySearchType uiModel.salesStatusFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.salesStatus && sf.userAction == True )
+                                |> (buildFilteredSearchResultBySearchType uiModel.yearFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.year && sf.userAction == True )
+                                >> (buildFilteredSearchResultBySearchType uiModel.makeFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.make && sf.userAction == True )
+                                >> (buildFilteredSearchResultBySearchType uiModel.modelFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.model && sf.userAction == True )
+                                >> (buildFilteredSearchResultBySearchType uiModel.sleeperRoofFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.sleeperRoof && sf.userAction == True )
+                                >> (buildFilteredSearchResultBySearchType uiModel.sleeperBunkFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.sleeperBunk && sf.userAction == True )
+                                >> (buildFilteredSearchResultBySearchType uiModel.suspensionFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.suspension && sf.userAction == True )                                        
+                                >> (buildFilteredSearchResultBySearchType uiModel.transmissionFilters)
+                                        (\t sf -> String.trim sf.searchFilterKey == String.trim t.transmission && sf.userAction == True )
+                                >> (buildFilteredSearchResultBySearchType uiModel.priceFilters)
+                                        (\t sf -> 
+                                                let
+                                                        minmaxValue = getMinMaxValue sf    
+                                                        minValue = Tuple.first minmaxValue
+                                                        maxValue = Tuple.second minmaxValue
+                                                in
+                                                        t.price >= minValue && t.price <= maxValue && sf.userAction == True 
+                                        )
+                                >> buildSearchFilterValueRecordList RearAxleType uiModel.rearAxleTypeFilters
+                                >> Array.map
+                                                (\sf ->
+                                                        findMatchAndSetUserAction uiModel.rearAxleTypeFilters sf 
+                                                )
+                
                 
                 newUIModel = 
                         {
@@ -427,6 +531,8 @@ rebuildSearchFiltersBasedOnCurrentSearchCriteria model uiModel =
                                                 , bodyTypeFilters = updatedBodyTypeFitlerList
                                                 , suspensionFilters = updatedSuspensionFitlerList
                                                 , engineMakeFilters = updatedEngineMakeFitlerList
+                                                , transmissionFilters = updatedTransmissionFitlerList
+                                                , rearAxleTypeFilters = updatedRearAxleTypeFitlerList
                         }
         in
                 newUIModel
@@ -464,6 +570,10 @@ applySearchFilters model uiModel =
                                 (\t sf -> String.trim sf.searchFilterKey == String.trim t.suspension && sf.userAction == True )
                         >> (buildFilteredSearchResultBySearchType uiModel.engineMakeFilters)
                                 (\t sf -> String.trim sf.searchFilterKey == String.trim t.engineMake && sf.userAction == True )
+                        >> (buildFilteredSearchResultBySearchType uiModel.transmissionFilters)
+                                (\t sf -> String.trim sf.searchFilterKey == String.trim t.transmission && sf.userAction == True )
+                        >> (buildFilteredSearchResultBySearchType uiModel.rearAxleTypeFilters)
+                                (\t sf -> String.trim sf.searchFilterKey == String.trim t.rearAxleType && sf.userAction == True )
 
         sortedFilterdTruckList =
             filterdTruckList

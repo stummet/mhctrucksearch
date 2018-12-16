@@ -28,7 +28,9 @@
     "locationName": "Cedar Rapids",
     "engineHP": 455,
     "bodyType": "Beverage",
-    "suspension": "Air"
+    "suspension": "Air",
+    "transmission": "6 Speed",
+    "rearAxleType": "Axle"
     },
     {
     "id": "e89d0ec8-a568-4554-9a22-003b49f32d84",
@@ -59,7 +61,9 @@
     "locationName": "South Dallas, TX",
     "engineHP": 455    ,
     "bodyType": "Dryvan",
-    "suspension": "Air"
+    "suspension": "Air",
+    "transmission": "4 Speed",
+    "rearAxleType": "Axle"
     },
     {
     "id": "a2145fbf-6ba6-494c-b04e-004e2c9279ff",
@@ -90,7 +94,9 @@
     "locationName": "",
     "engineHP": 380,
     "bodyType": "Dryvan",
-    "suspension": "Heavy"
+    "suspension": "Heavy",
+    "transmission": "6 Speed",
+    "rearAxleType": "Quad"
     },
     {
     "id": "764281c5-f778-414c-96cf-008ba58fb2bb",
@@ -121,7 +127,9 @@
     "locationName": "Oklahoma City",
     "engineHP": 450,
     "bodyType": "Flatbed",
-    "suspension": "Heavy"
+    "suspension": "Heavy",
+    "transmission": "4 Speed",
+    "rearAxleType": "Triaxle"
     },
     {
     "id": "c5f0ef4b-784f-4c30-9b40-00b3a137c5b0",
@@ -152,7 +160,9 @@
     "locationName": "",
     "engineHP": 380,
     "bodyType": "Dump",
-    "suspension": "Spring"
+    "suspension": "Spring",
+    "transmission": "10 Speed",
+    "rearAxleType": "TriAxle"
     }
     ]
 }

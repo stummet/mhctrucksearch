@@ -163,6 +163,8 @@ update msg (model, uiModel) =
                 bodyTypeFilters = buildSearchFilterValueRecordList BodyType uiModel.bodyTypeFilters trucks
                 suspensionFilters = buildSearchFilterValueRecordList Suspension uiModel.suspensionFilters trucks
                 engineMakeFilters = buildSearchFilterValueRecordList EngineMake uiModel.engineMakeFilters trucks
+                transmissionFilters = buildSearchFilterValueRecordList Transmission uiModel.transmissionFilters trucks
+                rearAxleTypeFilters = buildSearchFilterValueRecordList RearAxleType uiModel.rearAxleTypeFilters trucks
                 
                 --zc = Debug.log "trucks"  [trucks]--, newUIModel1.yearFilters]
                 --c = Debug.log "body filters"  [bodyTypeFilters]--, newUIModel1.yearFilters]
@@ -183,7 +185,10 @@ update msg (model, uiModel) =
                                         sleeperBunkFilters = sleeperBunkFilters,
                                         bodyTypeFilters = bodyTypeFilters,
                                         suspensionFilters = suspensionFilters,
-                                        engineMakeFilters = engineMakeFilters 
+                                        engineMakeFilters = engineMakeFilters,
+                                        transmissionFilters = transmissionFilters,
+                                        rearAxleTypeFilters = rearAxleTypeFilters
+
                         }
                     )
                     --, Cmd.none
@@ -286,6 +291,13 @@ update msg (model, uiModel) =
                             (uiModel.engineMakeFilters |> updateUserSelectedSearchFilter) (\mfArr -> {uiModel | engineMakeFilters = mfArr})
                                 --|> (\filters -> updateUserSelectedSearchFilter filters (\mfArr -> {uiModel | EngineMakeFilters = mfArr}) )
 
+                        Transmission -> 
+                            (uiModel.transmissionFilters |> updateUserSelectedSearchFilter) (\mfArr -> {uiModel | transmissionFilters = mfArr})
+                                --|> (\filters -> updateUserSelectedSearchFilter filters (\mfArr -> {uiModel | transmissionFilters = mfArr}) )                                
+
+                        RearAxleType -> 
+                            (uiModel.rearAxleTypeFilters |> updateUserSelectedSearchFilter) (\mfArr -> {uiModel | rearAxleTypeFilters = mfArr})
+                                --|> (\filters -> updateUserSelectedSearchFilter filters (\mfArr -> {uiModel | rearAxleTypeFilters = mfArr}) )
 
                 newFilteredTruckList = applySearchFilters model newUIModel
                                             |> sortTruckList uiModel.currentSortBy
@@ -372,6 +384,8 @@ update msg (model, uiModel) =
                                                                                     Array.toList uiModel.priceFilters,
                                                                                     Array.toList uiModel.bodyTypeFilters,
                                                                                     Array.toList uiModel.suspensionFilters,
+                                                                                    Array.toList uiModel.engineMakeFilters,
+                                                                                    Array.toList uiModel.engineMakeFilters,
                                                                                     Array.toList uiModel.engineMakeFilters
                                                                                 ]
 
@@ -531,6 +545,14 @@ view (model, uiModel) =
                                         lazy3 buildSearchFilterValuesGroup EngineMake model uiModel
                                     else
                                         none
+                                    , if List.length model.filteredTruckList > 0 then
+                                        lazy3 buildSearchFilterValuesGroup Transmission model uiModel
+                                    else
+                                        none
+                                    , if List.length model.filteredTruckList > 0 then
+                                        lazy3 buildSearchFilterValuesGroup RearAxleType model uiModel
+                                    else
+                                        none
                                 ]
                             ]
                             
@@ -571,7 +593,9 @@ view (model, uiModel) =
                                                                                     Array.toList uiModel.priceFilters,
                                                                                     Array.toList uiModel.bodyTypeFilters,
                                                                                     Array.toList uiModel.suspensionFilters,
-                                                                                    Array.toList uiModel.engineMakeFilters
+                                                                                    Array.toList uiModel.engineMakeFilters,
+                                                                                    Array.toList uiModel.transmissionFilters,
+                                                                                    Array.toList uiModel.rearAxleTypeFilters
                                                                                 ]
                                 ]
                                 ,column[ scrollbarY, wf,  bw 0, pde 5 0 0 0   ]

@@ -194,6 +194,28 @@ buildSearchFilterValueList searchFilterCustomType searchFilterTypes trucks =
                                 sfArray
                     )
 
+        Transmission -> 
+            --List.map (\t -> transmission) trucks
+            List.map .transmission trucks
+                |> applyExtraOnSearchFilter 0
+                |> (\sfArray -> 
+                                Array.indexedMap (\index sf -> 
+                                                SearchFilterType index sf "EXD" False (List.length <| (List.filter (\t -> String.trim t.transmission == sf) trucks )) searchFilterCustomType
+                                )
+                                sfArray
+                    )
+
+        RearAxleType -> 
+            --List.map (\t -> rearAxleType) trucks
+            List.map .rearAxleType trucks
+                |> applyExtraOnSearchFilter 0
+                |> (\sfArray -> 
+                                Array.indexedMap (\index sf -> 
+                                                SearchFilterType index sf "EXD" False (List.length <| (List.filter (\t -> String.trim t.rearAxleType == sf) trucks )) searchFilterCustomType
+                                )
+                                sfArray
+                    )
+
 buildSearchFilterValueRecordList : SearchFilterCustomType -> Array SearchFilterType -> List Truck -> Array SearchFilterType
 buildSearchFilterValueRecordList searchFilterCustomType searchFilterTypes trucks =
     buildSearchFilterValueList searchFilterCustomType searchFilterTypes trucks
@@ -230,13 +252,19 @@ buildSearchFilterValuesGroup searchFilterCustomType model uiModel =
                                 (uiModel.priceFilters, "Price", FilterCheckBoxClicked)
 
                             BodyType -> 
-                                (uiModel.bodyTypeFilters, "BodyType", FilterCheckBoxClicked)                                
+                                (uiModel.bodyTypeFilters, "Body Type", FilterCheckBoxClicked)                                
 
                             Suspension -> 
                                 (uiModel.suspensionFilters, "Suspension", FilterCheckBoxClicked)                                
 
                             EngineMake -> 
-                                (uiModel.engineMakeFilters, "EngineMake", FilterCheckBoxClicked)
+                                (uiModel.engineMakeFilters, "EngineMake", FilterCheckBoxClicked)                                
+
+                            Transmission -> 
+                                (uiModel.transmissionFilters, "Transmission", FilterCheckBoxClicked)                                
+
+                            RearAxleType -> 
+                                (uiModel.rearAxleTypeFilters, "Rear Axle Type", FilterCheckBoxClicked)
 
             searchFilterState = 
                     uiModel.expandCollapseSearchFilterStates

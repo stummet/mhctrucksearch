@@ -34,6 +34,8 @@ type alias Truck =
         , locationName      : String
         , bodyType          : String
         , suspension        : String
+        , transmission      : String
+        , rearAxleType      : String
     }
 
 type alias Model =
@@ -62,6 +64,8 @@ type alias UIModel =
         ,bodyTypeFilters : Array SearchFilterType
         ,suspensionFilters : Array SearchFilterType
         ,engineMakeFilters : Array SearchFilterType
+        ,transmissionFilters : Array SearchFilterType
+        ,rearAxleTypeFilters : Array SearchFilterType
         --,priceFilters : Array SearchFilterRangeType
         ,expandCollapseSearchFilterStates : Array SearchFilterState
         --,expandCollapseSearchFilterRangeStates : Array SearchFilterRangeState
@@ -95,6 +99,8 @@ type SearchFilterCustomType
     | BodyType
     | Suspension
     | EngineMake
+    | Transmission
+    | RearAxleType
 
 -- type SearchFilterRangeUnionType
 --     = Price
@@ -182,6 +188,8 @@ initalUIModel jsFlag =
         bodyTypeFilters = Array.empty,
         suspensionFilters = Array.empty,
         engineMakeFilters = Array.empty,
+        transmissionFilters = Array.empty,
+        rearAxleTypeFilters = Array.empty,
                                             -- this is to initialize an Array, repeat creates one item in this case and that lets us push rest of the items
                                             -- this list can be generated off of datasource, when that happens we dont need to hardcode index value, just use indexedMap
                                             -- and set the generated index value to index prop
@@ -194,7 +202,9 @@ initalUIModel jsFlag =
                                                 |> Array.push {index = 6,searchFilterCustomType = Price, userAction = False}
                                                 |> Array.push {index = 7,searchFilterCustomType = BodyType, userAction = False}                                                
                                                 |> Array.push {index = 8,searchFilterCustomType = Suspension, userAction = False}
-                                                |> Array.push {index = 9,searchFilterCustomType = EngineMake, userAction = True},
+                                                |> Array.push {index = 9,searchFilterCustomType = EngineMake, userAction = True}
+                                                |> Array.push {index = 10,searchFilterCustomType = Transmission, userAction = True}
+                                                |> Array.push {index = 11,searchFilterCustomType = RearAxleType, userAction = True},
 
         --expandCollapseSearchFilterRangeStates = Array.repeat 1 {index = 0,searchFilterRangeUnionType = Price, userAction = True},
 

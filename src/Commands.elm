@@ -76,7 +76,8 @@ trucksDecoder  =
         |> required "locationName" Decode.string
         |> required "bodyType" Decode.string
         |> required "suspension" Decode.string
-    
+        |> required "transmission" Decode.string   
+        |> required "rearAxleType" Decode.string  
 
 onFetchSearchFilterRangesDecoder : Decode.Decoder (List SearchFilterType)
 onFetchSearchFilterRangesDecoder = 
