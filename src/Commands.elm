@@ -7,13 +7,14 @@ import Msg exposing (..)
 import Model  exposing (..)
 --import RemoteData  exposing (..)
 import Array exposing(..)
+import Url.Builder exposing (..)
 
 import Json.Decode.Extra exposing (fromResult)
 
-fetchTrucks: Cmd Msg
-fetchTrucks =
+fetchTrucks : String -> Cmd Msg
+fetchTrucks searchText =
     Http.get
-        { url = fetchTrucksUrl
+        { url = fetchTrucksUrl searchText
         --, expect = expectJson (RemoteData.fromResult >> OnFetchTrucks) fetchTrucksDecoder
         , expect = expectJson OnFetchTrucks fetchTrucksDecoder
         }
@@ -26,10 +27,13 @@ fetchSearchFilterRanges =
         , expect = expectJson OnFetchSearchFilterRanges onFetchSearchFilterRangesDecoder
         }
 
-fetchTrucksUrl: String
-fetchTrucksUrl =
+fetchTrucksUrl : String -> String
+fetchTrucksUrl searchText =
         --"http://localhost:13627/api/repairorder/gettrucks"
-        --"http://localhost:50977/api/repairorder/gettrucks"
+            -- if String.isEmpty searchText then
+            --     "http://localhost:50977/api/repairorder/gettrucks"
+            -- else
+            --     crossOrigin "http://localhost:50977/api/repairorder/gettrucks" [searchText] []
         "http://localhost:3333/trks"
 
 
@@ -51,14 +55,14 @@ trucksDecoder  =
         |> required "stockNumber" Decode.int
         |> required "appraisalNumber" Decode.int
         |> required "poNumber" Decode.string
-        |> required "price" Decode.int
+        |> required "price" Decode.float
         |> required "title" Decode.string
         |> required "condition" Decode.string
         |> required "make" Decode.string
         |> required "model" Decode.string
         |> required "engineMake" Decode.string
         |> required "engineModel" Decode.string
-        |> required "engineHP" Decode.int
+        |> required "engineHP" Decode.float
         |> required "apu" Decode.string
         |> required "cdl" Decode.string
         |> required "year" Decode.string
@@ -71,13 +75,22 @@ trucksDecoder  =
         |> required "sleeperInches" Decode.string
         |> required "chassisNumber" Decode.string
         |> required "transType" Decode.string
-        |> required "mileage" Decode.int
+        |> required "mileage" Decode.float
         |> required "locationNumber" Decode.string
         |> required "locationName" Decode.string
+        |> required "salesStatusFlag" Decode.string
         |> required "bodyType" Decode.string
         |> required "suspension" Decode.string
-        |> required "transmission" Decode.string   
-        |> required "rearAxleType" Decode.string  
+        |> required "rearAxleType" Decode.string
+        |> required "wheelBase" Decode.float
+        |> required "frontAxleWeight" Decode.float
+        |> required "rearAxleWeight" Decode.float
+        |> required "fleetCode" Decode.string
+        |> required "truckStatus" Decode.string
+        |> required "specialFinancing" Decode.string
+        |> required "inventoryAge" Decode.float
+        |> required "owningBranch" Decode.string               
+    
 
 onFetchSearchFilterRangesDecoder : Decode.Decoder (List SearchFilterType)
 onFetchSearchFilterRangesDecoder = 
@@ -137,5 +150,18 @@ searchFilterRangeUnionTypeString string =
             case string of
                 "Price" ->
                     Decode.succeed Price
+                "EngineHP" ->
+                    Decode.succeed EngineHP
+                "WheelBase" ->
+                    Decode.succeed WheelBase
+                "Mileage" ->
+                    Decode.succeed Mileage
+                "FrontAxleWeight" ->
+                    Decode.succeed FrontAxleWeight
+                "RearAxleWeight" ->
+                    Decode.succeed RearAxleWeight
+                "InventoryAge" ->
+                    Decode.succeed InventoryAge
+                
                 _ ->
                     Decode.succeed Price
